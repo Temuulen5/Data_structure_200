@@ -1,4 +1,3 @@
-UB/Ugugdliin butets
-TH/Tuuh
-AI/Hiimel oyun uhaanii undes
-DB/Discret butets
+AI/Hiimel oyun uhaan
+UA/Uildveriin automatjuulalt
+UH/Utasgui holboo

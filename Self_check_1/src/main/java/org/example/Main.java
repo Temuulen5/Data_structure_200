@@ -11,12 +11,13 @@ public class Main {
         readSubjects();
         readProfessions();
         readExams();
+        registration.PrintSubjectList();
         registration.PrintMajorList();
         registration.PrintStudentList();
-        registration.PrintSubjectList();
         System.out.printf("Niit oyutnii dundaj GPA : %.3f\n", registration.GetAverageGPA());
         registration.PrintFailedStudents();
         registration.PrintStudentsBySubject();
+        registration.PrintStudentsByMajor();
     }
 
     private static void readSubjects() {
@@ -61,25 +62,22 @@ public class Main {
 
             while ((line = input.readLine()) != null) {
                 String[] values = line.split("/");
-                if (registration.GetStudentByCode(values[0]) == null) {
-                    Student student = new Student();
-                    Lessons lesson = new Lessons();
-                    Subject subject = registration.GetSubjectByCode(values[1]);
-                    lesson.setLearned(subject);
-                    lesson.setScore(Integer.parseInt(values[2]));
+
+                Student student = registration.GetStudentByCode(values[0]);
+                Lessons lesson = new Lessons();
+                Subject subject = registration.GetSubjectByCode(values[1]);
+
+                lesson.setLearned(subject);
+                lesson.setScore(Integer.parseInt(values[2]));
+
+                if (student == null) {
+                    student = new Student();
                     student.setCode(values[0]);
                     student.lessons.add(student.lessons.size(), lesson);
                     registration.studentList.add(registration.studentList.size(), student);
                 } else {
-                    Student student = registration.GetStudentByCode(values[0]);
-                    Lessons lesson = new Lessons();
-                    Subject subject = registration.GetSubjectByCode(values[1]);
-                    lesson.setLearned(subject);
-                    lesson.setScore(Integer.parseInt(values[2]));
-                    student.setCode(values[0]);
                     student.lessons.add(student.lessons.size(), lesson);
                 }
-
             }
         } catch (Exception e) {
             throw new ExceptionInInitializerError(e);

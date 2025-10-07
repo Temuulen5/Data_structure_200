@@ -7,7 +7,6 @@ public class Registration {
     public ArrayLinearList subjectList;
     public ArrayLinearList majorList;
 
-
     public Registration() {
         studentList = new ArrayLinearList();
         subjectList = new ArrayLinearList();
@@ -112,6 +111,7 @@ public class Registration {
                 System.out.println(student);
             }
         }
+        System.out.println();
     }
 
     public void PrintStudentsBySubject() {
@@ -126,10 +126,33 @@ public class Registration {
                     System.out.println("    " + student.getCode() + "    " + point);
                 }
             }
+            System.out.println();
         }
     }
 
+    public Major GetMajorByStudentCode(String studentCode) {
+        String majorCode = studentCode.substring(0, 2);
+        for (int i = 0; i < majorList.size(); i++) {
+            Major major = (Major) majorList.get(i);
+            if (major.getCode().equals(majorCode)) {
+                return major;
+            }
+        }
+        return null;
+    }
+
     public void PrintStudentsByMajor() {
-        //TODO sample file
+        System.out.println("________________________________STUDENTS BY MAJOR_____________________________");
+        for (int i = 0; i < this.majorList.size(); i++) {
+            Major major = (Major) majorList.get(i);
+            System.out.printf("%s(%s) angiin oyutnuud : \n", major.getName(), major.getCode());
+            for (int j = 0; j < this.studentList.size(); j++) {
+                Student student = (Student) this.studentList.get(j);
+                if (major.getCode().equals(student.getCode().substring(0, 2))) {
+                    System.out.println(student.getCode() + " " + student.getGPA());
+                }
+            }
+            System.out.println();
+        }
     }
 }

@@ -59,6 +59,13 @@ public class MyStack implements Stack {
         IO.println("");
     }
 
+    public void PrintStack(MyStack myStack) {
+        for (int i = 0; i < myStack.size(); i++) {
+            IO.print("    " + myStack.elements.get(i));
+        }
+        IO.println("");
+    }
+
     public void splitStack() {
         int splitIndex = this.elements.size() / 2;
 
