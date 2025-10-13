@@ -4,6 +4,16 @@ public class Major {
     public String code;
     public String name;
 
+    public Major(String code, String name) {
+        this.code = code;
+        this.name = name;
+    }
+
+    public Major() {
+        this.code = "";
+        this.name = "";
+    }
+
     public String getCode() {
         return code;
     }

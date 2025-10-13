@@ -1,0 +1,68 @@
+@startuml
+
+class Registration {
+    + ArrayLinearList studentList
+    + ArrayLinearList subjectList
+    + ArrayLinearList majorList
+    + readSubjects (String fileName) : void
+    + readProfessions (String fileName) : void
+    + readExams (String fileName) : void
+    + GetStudentByCode () : Student
+    + PrintStudentList (): void
+    + PrintMajorList (): void
+    + PrintSubjectList (): void
+    + StudentExists (String code) : boolean
+    + GetSubjectByCode (String code) : Subject
+    + GetAverageGPA () : float
+    + PrintFailedStudents () : void
+    + PrintStudentsBySubject () : void
+    + GetMajorByStudentCode (String studentCode) : Major
+    + PrintStudentsByMajor () : void
+    + getters and setters () :
+}
+
+class Student {
+    + String code
+    + float GPA
+    + Chain lessons
+    + HasLesson (String lessonCode) : boolean
+    + GetScoreByLessonCode (String lessonCode) : int
+    + IsFailed () : boolean
+    + getGPA () : float
+    + setGPA () : void
+    + PointToGPA (float point) : float
+    + getters and setters () :
+    + toString () : String
+}
+
+class Lessons {
+    + Subject learned
+    + int score
+    + getters and setters () :
+    + toString () : String
+}
+
+class Subject {
+    + String code
+    + String name
+    + float credit
+    + getters and setters () :
+    + toString () : String
+}
+
+class Major {
+    + String code
+    + String name
+    + getters and setters () :
+    + toString () : String
+}
+
+Registration --> Student : studentList <
+Registration --> Subject : subjectList <
+Registration --> Major : majorList <
+
+Student --> Lessons : lessons <
+
+Lessons --> Subject : learned <
+
+@enduml

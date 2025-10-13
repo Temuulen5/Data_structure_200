@@ -5,6 +5,18 @@ public class Subject {
     public String name;
     public float credit;
 
+    public Subject(String code, String name, float credit) {
+        this.code = code;
+        this.name = name;
+        this.credit = credit;
+    }
+
+    public Subject() {
+        this.code = "";
+        this.name = "";
+        this.credit = 0F;
+    }
+
     public String getCode() {
         return code;
     }

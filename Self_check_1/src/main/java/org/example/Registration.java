@@ -2,6 +2,9 @@ package org.example;
 
 import dataStructures.ArrayLinearList;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+
 public class Registration {
     public ArrayLinearList studentList;
     public ArrayLinearList subjectList;
@@ -15,6 +18,70 @@ public class Registration {
 
     public ArrayLinearList getStudentList() {
         return studentList;
+    }
+
+    public void readSubjects(String fileName) {
+        try {
+            BufferedReader input = new BufferedReader(new FileReader(fileName));
+            String line;
+
+            while ((line = input.readLine()) != null) {
+                String[] values = line.split("/");
+                Subject subject = new Subject();
+                subject.setCode(values[0]);
+                subject.setName(values[1]);
+                subject.setCredit(Float.parseFloat(values[2]));
+                this.subjectList.add(this.subjectList.size(), subject);
+            }
+        } catch (Exception e) {
+            throw new ExceptionInInitializerError(e);
+        }
+    }
+
+    public void readProfessions(String fileName) {
+        try {
+            BufferedReader input = new BufferedReader(new FileReader(fileName));
+            String line;
+
+            while ((line = input.readLine()) != null) {
+                String[] values = line.split("/");
+                Major major = new Major();
+                major.setCode(values[0]);
+                major.setName(values[1]);
+                this.majorList.add(this.majorList.size(), major);
+            }
+        } catch (Exception e) {
+            throw new ExceptionInInitializerError(e);
+        }
+    }
+
+    public void readExams(String fileName) {
+        try {
+            BufferedReader input = new BufferedReader(new FileReader(fileName));
+            String line;
+
+            while ((line = input.readLine()) != null) {
+                String[] values = line.split("/");
+
+                Student student = this.GetStudentByCode(values[0]);
+                Lessons lesson = new Lessons();
+                Subject subject = this.GetSubjectByCode(values[1]);
+
+                lesson.setLearned(subject);
+                lesson.setScore(Integer.parseInt(values[2]));
+
+                if (student == null) {
+                    student = new Student();
+                    student.setCode(values[0]);
+                    student.lessons.add(student.lessons.size(), lesson);
+                    this.studentList.add(this.studentList.size(), student);
+                } else {
+                    student.lessons.add(student.lessons.size(), lesson);
+                }
+            }
+        } catch (Exception e) {
+            throw new ExceptionInInitializerError(e);
+        }
     }
 
     public void setStudentList(ArrayLinearList studentList) {

@@ -7,6 +7,12 @@ public class Student {
     public float GPA;
     public Chain lessons;
 
+    public Student(String code) {
+        this.code = code;
+        this.GPA = 0;
+        this.lessons = new Chain();
+    }
+
     public Student() {
         this.code = "";
         this.GPA = 0;

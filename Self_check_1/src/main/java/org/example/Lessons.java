@@ -4,6 +4,10 @@ public class Lessons {
     public Subject learned;
     public int score;
 
+    public Lessons() {
+        this.score = 0;
+    }
+
     public Subject getLearned() {
         return learned;
     }
