@@ -1,0 +1,32 @@
+@startuml
+left to right direction
+
+actor Traveler
+actor CentralSystem as "Нэгдсэн компьютерийн систем"
+
+usecase BuyOneWayTicket
+usecase BuyWeeklyCard
+usecase BuyMonthlyCard
+usecase UpdateTariff
+usecase TimeOut
+usecase TransactionAborted
+
+Traveler --> BuyOneWayTicket
+Traveler --> BuyWeeklyCard
+Traveler --> BuyMonthlyCard
+
+BuyOneWayTicket .> TimeOut : <<extends>>
+BuyOneWayTicket .> TransactionAborted : <<extends>>
+
+BuyWeeklyCard .> TimeOut : <<extends>>
+BuyWeeklyCard .> TransactionAborted : <<extends>>
+
+BuyMonthlyCard .> TimeOut : <<extends>>
+BuyMonthlyCard .> TransactionAborted : <<extends>>
+
+CentralSystem --> BuyOneWayTicket
+CentralSystem --> BuyWeeklyCard
+CentralSystem --> BuyMonthlyCard
+CentralSystem --> UpdateTariff
+
+@enduml
