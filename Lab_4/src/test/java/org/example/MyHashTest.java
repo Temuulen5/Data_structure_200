@@ -17,7 +17,7 @@ class MyHashTest {
         assertEquals("Ten", oldValue);
         assertEquals("UpdatedTen", hash.get(10));
 
-        assertNull(hash.updateElement(99, "DoesNotExist"), "Should return null if key not found");
+        assertNull(hash.updateElement(99, "DoesNotExist"));
     }
 
     @Test
@@ -27,7 +27,7 @@ class MyHashTest {
         hash.put(1, "One");
         hash.put(2, "Two");
 
-        Object value = hash.updateKey(1, 11);
+        hash.updateKey(1, 11);
         assertEquals("One", hash.get(11));
     }
 

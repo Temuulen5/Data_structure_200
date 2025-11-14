@@ -9,27 +9,23 @@ public class MyHash extends HashChains {
     }
 
     public Object updateElement(Object theKey, Object theValue) {
-        Object oldElement = this.get(theKey);
-        if (oldElement != null) {
-            this.put(theKey, theValue);
-            return oldElement;
+        Object object = get(theKey);
+        if (object != null) {
+            put(theKey, theValue);
         }
-        return null;
+        return object;
     }
 
     public Object updateKey(Object theKey, Object theNewKey) {
-        Object value = this.get(theKey);
-        if (value != null) {
-            this.delete(theKey);
-            this.put(theNewKey, value);
+        Object object = get(theKey);
+        if (object != null) {
+            remove(theKey);
+            put(theNewKey, object);
         }
-        return value;
+        return object;
     }
 
     public void delete(Object theKey) {
-        Object object = this.get(theKey);
-        if (object != null) {
-            this.remove(theKey);
-        }
+        remove(theKey);
     }
 }
