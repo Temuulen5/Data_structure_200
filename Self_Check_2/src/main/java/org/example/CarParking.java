@@ -5,14 +5,10 @@ import java.util.Scanner;
 import java.util.Stack;
 
 public class CarParking {
-    private static Stack<Car> cars = new Stack();
-    private static final int CAPACITY = 10;
+    private Stack<Car> cars = new Stack();
+    private final int CAPACITY = 10;
 
-    static void main() {
-        input();
-    }
-
-    public static void input() {
+    public void input() {
         try (BufferedReader br = new BufferedReader(new FileReader("src/main/resources/cars.txt"))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -27,7 +23,7 @@ public class CarParking {
         }
     }
 
-    public static void process(String command, String plateNumber) {
+    public void process(String command, String plateNumber) {
         if (command.equals("A")) {
             if (cars.size() < CAPACITY) {
                 Car car = new Car(plateNumber);
@@ -38,26 +34,35 @@ public class CarParking {
             }
         } else if (command.equals("D")) {
             if (isParked(plateNumber)) {
+                Stack<Car> temp = new Stack();
                 int counter = 0;
                 for (int i = 0; i < CAPACITY; i++) {
                     Car car = cars.pop();
+                    temp.push(car);
                     counter++;
                     if (car.getPlateNumber().equals(plateNumber)) {
+                        temp.pop();
                         break;
                     }
                 }
                 System.out.printf("Departure %s -> %d cars moved out.\n", plateNumber, counter);
+                int loopSize = temp.size();
+                for (int i = 0; i < loopSize; i++) {
+                    Car car = temp.pop();
+                    cars.push(car);
+                    System.out.printf("Arrival %s -> There is room.\n", car.getPlateNumber());
+                }
             } else {
                 System.out.printf("Departure %s -> This car not in the garage.\n", plateNumber);
             }
         }
     }
 
-    public static void output() {
+    public void output() {
         cars.forEach(System.out::println);
     }
 
-    public static boolean isParked(String plateNumber) {
+    public boolean isParked(String plateNumber) {
         for (Car car : cars) {
             if (plateNumber.equals(car.getPlateNumber())) {
                 return true;

@@ -1,32 +1,68 @@
 @startuml
-left to right direction
 
-actor Traveler
-actor CentralSystem as "Нэгдсэн компьютерийн систем"
+class Registration {
+    + ArrayLinearList studentList
+    + ArrayLinearList subjectList
+    + ArrayLinearList majorList
+    + readSubjects (String fileName) : void
+    + readProfessions (String fileName) : void
+    + readExams (String fileName) : void
+    + GetStudentByCode () : Student
+    + PrintStudentList (): void
+    + PrintMajorList (): void
+    + PrintSubjectList (): void
+    + StudentExists (String code) : boolean
+    + GetSubjectByCode (String code) : Subject
+    + GetAverageGPA () : float
+    + PrintFailedStudents () : void
+    + PrintStudentsBySubject () : void
+    + GetMajorByStudentCode (String studentCode) : Major
+    + PrintStudentsByMajor () : void
+    + getters and setters () :
+}
 
-usecase BuyOneWayTicket
-usecase BuyWeeklyCard
-usecase BuyMonthlyCard
-usecase UpdateTariff
-usecase TimeOut
-usecase TransactionAborted
+class Student {
+    + String code
+    + float GPA
+    + Chain lessons
+    + HasLesson (String lessonCode) : boolean
+    + GetScoreByLessonCode (String lessonCode) : int
+    + IsFailed () : boolean
+    + getGPA () : float
+    + setGPA () : void
+    + PointToGPA (float point) : float
+    + getters and setters () :
+    + toString () : String
+}
 
-Traveler --> BuyOneWayTicket
-Traveler --> BuyWeeklyCard
-Traveler --> BuyMonthlyCard
+class User {
+    + String role
+    + int score
+    + getters and setters () :
+    + toString () : String
+}
 
-BuyOneWayTicket .> TimeOut : <<extends>>
-BuyOneWayTicket .> TransactionAborted : <<extends>>
+class Sensor {
+    + String code
+    + String name
+    + float credit
+    + getters and setters () :
+    + toString () : String
+}
 
-BuyWeeklyCard .> TimeOut : <<extends>>
-BuyWeeklyCard .> TransactionAborted : <<extends>>
+class Major {
+    + String code
+    + String name
+    + getters and setters () :
+    + toString () : String
+}
 
-BuyMonthlyCard .> TimeOut : <<extends>>
-BuyMonthlyCard .> TransactionAborted : <<extends>>
+Registration --> Student : studentList <
+Registration --> Subject : subjectList <
+Registration --> Major : majorList <
 
-CentralSystem --> BuyOneWayTicket
-CentralSystem --> BuyWeeklyCard
-CentralSystem --> BuyMonthlyCard
-CentralSystem --> UpdateTariff
+Student --> Lessons : lessons <
+
+Lessons --> Subject : learned <
 
 @enduml

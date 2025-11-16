@@ -1,0 +1,21 @@
+@startuml
+class Car {
+    +String color
+    +String model
+    +String plateNumber
+    +public GetterAndSetters()
+    +public String toString()
+}
+
+class CarParking {
+    - static Stack<Car> cars
+    - static int final CAPACITY
+    + static void main()
+    + static void input()
+    + static void process()
+    + static void output()
+    + static boolean isParked()
+}
+
+Car --> CarParking : cars
+@enduml
