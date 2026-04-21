@@ -4,28 +4,32 @@ import dataStructures.HashChains;
 import dataStructures.HashTable;
 
 public class MyHash extends HashChains {
+
     public MyHash(int theDivisor) {
         super(theDivisor);
     }
 
-    public Object updateElement(Object theKey, Object theValue) {
-        Object object = get(theKey);
+    public Object updateElement(Object key, Object value) {
+        Object object = get(key);
         if (object != null) {
-            put(theKey, theValue);
+            put(key, value);
         }
         return object;
     }
 
-    public Object updateKey(Object theKey, Object theNewKey) {
-        Object object = get(theKey);
+    public Object updateKey(Object key, Object newKey) {
+        Object object = get(key);
         if (object != null) {
-            remove(theKey);
-            put(theNewKey, object);
+            remove(key);
+            put(newKey, object);
         }
         return object;
     }
 
-    public void delete(Object theKey) {
-        remove(theKey);
+    public void delete(Object key) {
+        Object object = get(key);
+        if (object != null) {
+            remove(key);
+        }
     }
 }
